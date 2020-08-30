@@ -1,9 +1,6 @@
 from bs4 import BeautifulSoup, NavigableString
-import torch
-from transformers import BertTokenizer, BertModel, BertForMaskedLM
-import math
 import spacy
-import os, os.path, sys
+import os.path, sys
 
 sys.path.append(os.path.join(os.getcwd(), "../govuk-knowledge-graph"))
 from src.eligibility.govNER.govNER import GovNER
