@@ -288,7 +288,8 @@ def extract_knowledge_for_pattern(nlp, ner, chunker, sentence, pattern):
             object_entity = ner.get_full_entity_for_word(sentence, chunk[1])
             if object_entity and (pattern['any_object_types'] or object_entity['entity_type'] in pattern['object_types']):
                 full_subject_entity = chunker.chunk(chunk[0], subject_entity['entity'])
-                things_that_are.append({'thing': full_subject_entity, 'join': pattern['join'], 'description': object_entity['entity'], 'sent': sentence})
+                full_object_entity = chunker.chunk(chunk[1], object_entity['entity'])
+                things_that_are.append({'thing': full_subject_entity, 'join': pattern['join'], 'description': full_object_entity, 'sent': sentence})
     return things_that_are
 
 
