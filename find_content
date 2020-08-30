@@ -1,0 +1,20 @@
+#!/bin/bash
+
+usage="Script to quickly find files that meet certain patterns and export their names to a file
+
+The following options are available:
+  -p    Patterns to match (eg ' is a | is a type of ')  (Required)"
+
+while getopts p:h option
+do
+case "${option}"
+in
+p) patterns=${OPTARG};;
+h) echo "$usage"
+   exit;;
+esac
+done
+echo "Looking for files meeting patterns: ${patterns}"
+filenames=$(find . -type f -print0 | xargs -0 -n10 -P4 grep -l -H -r -E "${patterns}")
+echo "$filenames" > files_matching_pattern.txt
+echo "Done! Saved output to: 'files_matching_pattern.txt'"
